@@ -3,7 +3,8 @@ import { PERFIL } from "../config.js";
 import { filtrarRepos, lenguajesDisponibles, ordenarRepos } from "../utils/repos.js";
 import { tiempoRelativo } from "../utils/fechas.js";
 import { TarjetaProyecto } from "./TarjetaProyecto.jsx";
-import { IconoGithub } from "./Iconos.jsx";
+import { EnlaceExterno } from "./EnlaceExterno.jsx";
+import { IconoFlecha } from "./Iconos.jsx";
 import "../styles/proyectos.css";
 
 function mensajeError(error, tp, idioma) {
@@ -50,6 +51,7 @@ export function Proyectos({ github, filtros, onCambiarFiltros, idioma, t }) {
     <section id="proyectos" className="seccion" aria-labelledby="proyectos-titulo">
       <div className="contenedor">
         <header className="seccion__cabecera">
+          <p className="etiqueta">{tp.etiqueta}</p>
           <h2 id="proyectos-titulo" tabIndex={-1}>
             {tp.titulo}
           </h2>
@@ -62,13 +64,13 @@ export function Proyectos({ github, filtros, onCambiarFiltros, idioma, t }) {
           <div className="aviso" role="alert">
             <p>{mensajeError(error, tp, idioma)}</p>
             <div className="acciones">
-              <button type="button" className="boton boton--principal" onClick={recargar}>
+              <button type="button" className="boton boton--aurora" onClick={recargar}>
                 {tp.reintentar}
               </button>
-              <a className="boton" href={`${PERFIL.githubUrl}?tab=repositories`} target="_blank" rel="noopener noreferrer">
-                <IconoGithub />
+              <EnlaceExterno className="boton" href={`${PERFIL.githubUrl}?tab=repositories`} aviso={t.pestanaNueva}>
                 {tp.abrirGithub}
-              </a>
+                <IconoFlecha />
+              </EnlaceExterno>
             </div>
           </div>
         )}
@@ -152,7 +154,7 @@ export function Proyectos({ github, filtros, onCambiarFiltros, idioma, t }) {
               <ul className="proyectos__lista">
                 {visibles.map((repo) => (
                   <li key={repo.id} className={repo.destacado ? "proyectos__item--destacado" : undefined}>
-                    <TarjetaProyecto repo={repo} idioma={idioma} tp={tp} />
+                    <TarjetaProyecto repo={repo} idioma={idioma} t={t} />
                   </li>
                 ))}
               </ul>

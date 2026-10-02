@@ -12,16 +12,19 @@ Web personal con mi CV y mis proyectos. Los proyectos se cargan en directo desde
 ## Qué hace
 
 - **Proyectos automáticos** desde [github.com/Luisff511](https://github.com/Luisff511), con buscador (sin importar tildes), filtro por lenguaje y orden por fecha, estrellas o nombre.
-- **Trayectoria interactiva**: cada trabajo es un carril sobre un eje 2015 – hoy, para ver qué trabajos se solapan. Al pulsar uno se muestran sus logros.
+- **Esfera de partículas** animada en el inicio, dibujada con Canvas 2D: gira, se inclina siguiendo el ratón y se detiene cuando no está en pantalla para no gastar batería.
+- **Cifras del CV**, con el número de repositorios calculado en directo.
+- **Trayectoria interactiva**: cada trabajo es una barra sobre un eje 2015 – hoy, para ver qué trabajos se solapan. Al elegir uno se muestran sus logros.
 - **Habilidades conectadas con los proyectos**: si un repositorio usa React, Python, etc., esa habilidad se puede pulsar y filtra los proyectos.
 - **Español e inglés**, elegido según el idioma del navegador y recordado entre visitas.
-- **Modo claro y oscuro**, que sigue al sistema hasta que se elige uno.
 - **Accesible**: navegable con teclado, textos para lector de pantalla y animaciones desactivadas si el sistema pide menos movimiento.
 - **Resistente a fallos**: guarda la respuesta de GitHub 30 minutos y, si GitHub no responde, muestra la última copia y explica qué ha pasado.
 
-## Tecnologías
+## Diseño
 
-React 19 (componentes funcionales y hooks), Vite, JavaScript moderno, CSS con variables (sin frameworks), API REST de GitHub, GitHub Actions y tests con el ejecutor nativo de Node (`node:test`).
+Sigue la guía de estilo "Auros": un lienzo oscuro verde azulado donde la profundidad se crea con escalones de color (hundido `#011d1c`, lienzo `#012624`, elevado `#003734`) en lugar de sombras. El color está racionado: blancos y platas para el texto, el degradado aurora solo en el botón principal de cada sección, el degradado bioluminiscente para el elemento activo y el rosa fósforo solo para las cifras grandes. Tipografía de peso medio con tracking negativo en los títulos y etiquetas en mayúsculas con tracking amplio. Solo dos radios: 16 px en tarjetas y 6 px en botones.
+
+La fuente original de la guía (Matter) es de pago, así que se usa DM Sans, uno de los sustitutos que propone la propia guía.
 
 ## Cómo funciona la carga automática
 
@@ -49,17 +52,18 @@ Los forks no se muestran. Para excluir un repositorio por nombre, añádelo a `e
 ```
 cv-interactivo/
 ├── .github/workflows/deploy.yml   # Compila y publica en GitHub Pages en cada push a main
-├── public/                        # Foto, CV en PDF y favicon (se copian tal cual)
+├── public/                        # CV en PDF y favicon (se copian tal cual)
 ├── src/
 │   ├── main.jsx                   # Punto de entrada
 │   ├── App.jsx                    # Estado global: idioma, tema, repos y filtros
 │   ├── config.js                  # Datos personales y opciones de proyectos
-│   ├── components/                # Cabecera, Hero, Proyectos, TarjetaProyecto, Trayectoria, Formacion, Contacto, Iconos
+│   ├── components/                # Cabecera, Hero, EsferaParticulas, Cifras, Proyectos, TarjetaProyecto,
+│   │                              # Trayectoria, Formacion, Contacto, Molecula, EnlaceExterno, Iconos
 │   ├── hooks/                     # useGithubRepos, usePreferencia, useConsultaMedia
-│   ├── utils/                     # repos.js y fechas.js (lógica pura, testeada)
+│   ├── utils/                     # repos.js, fechas.js y esfera.js (lógica pura, testeada)
 │   ├── data/                      # cv.js (contenido en es/en) y textos.js (interfaz)
 │   └── styles/                    # Una hoja de estilos por componente + base.css con los tokens
-├── tests/repos.test.js
+├── tests/                         # repos.test.js y esfera.test.js
 ├── index.html
 ├── package.json
 └── vite.config.js
@@ -103,9 +107,8 @@ Si usas otro nombre de repositorio, la web quedará en `https://luisff511.github
 - **Datos personales y enlaces:** `src/config.js`
 - **Experiencia, formación y habilidades:** `src/data/cv.js`
 - **Textos de la interfaz:** `src/data/textos.js`
-- **Foto:** sustituye `public/foto.jpg` (mejor con al menos 300 px de ancho)
 - **CV descargable:** sustituye `public/cv-luis-franco-frontend-en.pdf`
-- **Colores:** variables al principio de `src/styles/base.css`
+- **Colores, tipografía y radios:** variables al principio de `src/styles/base.css`
 
 ## Licencia
 

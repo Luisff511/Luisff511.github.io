@@ -1,6 +1,7 @@
 import { FORMACION, HABILIDADES } from "../data/cv.js";
 import { traducir } from "../data/textos.js";
 import { hayCoincidencias } from "../utils/repos.js";
+import { IconoFlecha } from "./Iconos.jsx";
 import "../styles/formacion.css";
 
 export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
@@ -10,6 +11,7 @@ export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
     <section id="formacion" className="seccion" aria-labelledby="formacion-titulo">
       <div className="contenedor">
         <header className="seccion__cabecera">
+          <p className="etiqueta">{tf.etiqueta}</p>
           <h2 id="formacion-titulo">{tf.titulo}</h2>
         </header>
 
@@ -36,10 +38,10 @@ export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
                 <ul className="habilidades">
                   {grupo.items.map((item) => {
                     const texto = traducir(item.texto, idioma);
-                    const activa = hayCoincidencias(repos, item.accion);
+                    const enlaza = hayCoincidencias(repos, item.accion);
                     return (
                       <li key={texto}>
-                        {activa ? (
+                        {enlaza ? (
                           <button
                             type="button"
                             className="habilidad habilidad--enlace"
@@ -47,6 +49,7 @@ export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
                             title={tf.verProyectosDe(texto)}
                           >
                             {texto}
+                            <IconoFlecha width={14} height={14} />
                             <span className="solo-lector">. {tf.verProyectosDe(texto)}</span>
                           </button>
                         ) : (

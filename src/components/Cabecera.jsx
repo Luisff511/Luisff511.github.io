@@ -1,12 +1,11 @@
 import { PERFIL } from "../config.js";
-import { IconoLuna, IconoSol } from "./Iconos.jsx";
 import "../styles/cabecera.css";
 
 const SECCIONES = ["proyectos", "trayectoria", "formacion", "contacto"];
+const BASE = import.meta.env.BASE_URL;
 
-export function Cabecera({ t, idioma, onCambiarIdioma, tema, onCambiarTema }) {
+export function Cabecera({ t, idioma, onCambiarIdioma }) {
   const otroIdioma = idioma === "es" ? "en" : "es";
-  const oscuro = tema === "oscuro";
 
   return (
     <header className="cabecera">
@@ -28,7 +27,7 @@ export function Cabecera({ t, idioma, onCambiarIdioma, tema, onCambiarTema }) {
         <div className="cabecera__acciones">
           <button
             type="button"
-            className="boton-icono boton-icono--texto"
+            className="boton-idioma"
             onClick={onCambiarIdioma}
             aria-label={t.cambiarIdioma}
             title={t.cambiarIdioma}
@@ -36,15 +35,9 @@ export function Cabecera({ t, idioma, onCambiarIdioma, tema, onCambiarTema }) {
           >
             {t.etiquetaIdioma}
           </button>
-          <button
-            type="button"
-            className="boton-icono"
-            onClick={onCambiarTema}
-            aria-label={oscuro ? t.activarClaro : t.activarOscuro}
-            title={oscuro ? t.activarClaro : t.activarOscuro}
-          >
-            {oscuro ? <IconoSol /> : <IconoLuna />}
-          </button>
+          <a className="boton boton--compacto" href={`${BASE}${PERFIL.cvPdf}`} download>
+            {t.descargarCv}
+          </a>
         </div>
       </div>
     </header>

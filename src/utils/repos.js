@@ -89,25 +89,3 @@ export function hayCoincidencias(repos, accion) {
   if (!accion) return false;
   return filtrarRepos(repos, accion).length > 0;
 }
-
-// Colores de lenguaje de GitHub (linguist) para el punto de cada tarjeta.
-const COLORES_LENGUAJE = {
-  JavaScript: "#f1e05a",
-  TypeScript: "#3178c6",
-  HTML: "#e34c26",
-  CSS: "#663399",
-  SCSS: "#c6538c",
-  Python: "#3572A5",
-  "Jupyter Notebook": "#DA5B0B",
-  Java: "#b07219",
-  Kotlin: "#A97BFF",
-  "C#": "#178600",
-  PHP: "#4F5D95",
-  Vue: "#41b883",
-  Dart: "#00B4AB",
-  Shell: "#89e051",
-};
-
-export function colorLenguaje(lenguaje) {
-  return COLORES_LENGUAJE[lenguaje] ?? "#8b949e";
-}

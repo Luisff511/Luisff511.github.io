@@ -1,62 +1,49 @@
 /* ------------------------------------------------------------------
-   Tokens de diseño
-   Paleta inspirada en la carretera: hormigón, asfalto y la línea ámbar
-   de señalización, con el azul del CV como color principal.
-   Tipografía: Overpass, derivada de Highway Gothic (señales de tráfico).
+   Tokens de diseño (guía "Auros")
+   Lienzo abisal verde azulado, profundidad por escalones de color en
+   lugar de sombras, color racionado y tipografía de peso medio.
+   Matter (la fuente original) es de pago: se sustituye por DM Sans.
 ------------------------------------------------------------------- */
 :root {
-  --fondo: #f3f5f8;
-  --superficie: #ffffff;
-  --texto: #18202c;
-  --texto-suave: #4d5868;
-  --linea: #d6dce4;
-  --azul: #1f4e8c;
-  --azul-hover: #173c6c;
-  --sobre-azul: #ffffff;
-  --ambar: #e3a008;
-  --asfalto: #39414e;
-  --asfalto-activo: #1f4e8c;
-  --tinte: rgb(31 78 140 / 0.08);
+  /* Superficies: de más hundida a más elevada */
+  --profundo: #011d1c; /* Liquid Deep: bandas hundidas y pie */
+  --abismo: #012624; /* Liquid Abyss: lienzo principal */
+  --alga: #003734; /* Liquid Kelp: tarjetas y botones */
+  --pizarra: #707777; /* Slate Deep: bordes y estados inactivos */
 
-  --fuente: "Overpass Variable", "Overpass", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Texto */
+  --platino: #ffffff; /* títulos y navegación */
+  --niebla: #edfffe; /* cuerpo destacado */
+  --plata: #bbc7c6; /* cuerpo y textos secundarios */
+  --ceniza: #f2f2f2;
+
+  /* Acentos racionados */
+  --fosforo: #fde9ff; /* solo para cifras grandes */
+  --grad-bioluminiscente: linear-gradient(90deg, rgb(0 130 124) 0%, rgb(203 255 252) 100%);
+  --grad-aurora: linear-gradient(
+    90deg,
+    rgb(203 255 252) 0%,
+    rgb(237 255 254) 26.25%,
+    rgb(255 253 250) 47.57%,
+    rgb(250 209 255) 88.96%
+  );
+  --relleno-flecha: rgb(3 81 75 / 0.5);
+  --linea: rgb(255 255 255 / 0.1);
+  --linea-fuerte: rgb(255 255 255 / 0.3);
+
+  /* Tipografía */
+  --fuente: "DM Sans Variable", "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Forma: solo dos radios */
+  --radio-tarjeta: 16px;
   --radio: 6px;
-  --ancho: 70rem;
-  --medida: 62ch;
 
-  color-scheme: light;
-}
+  /* Maquetación */
+  --ancho: 76rem;
+  --medida: 37.5rem; /* columnas de lectura de ~600 px */
+  --hueco: 1.25rem; /* 20 px entre elementos */
+  --hueco-seccion: clamp(4.25rem, 9vw, 8.75rem); /* 68 a 140 px */
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) {
-    --fondo: #1b1f26;
-    --superficie: #232933;
-    --texto: #e7ebf1;
-    --texto-suave: #a9b3c2;
-    --linea: #363d49;
-    --azul: #8db3ec;
-    --azul-hover: #b0cbf2;
-    --sobre-azul: #10233f;
-    --ambar: #f0b429;
-    --asfalto: #4a5263;
-    --asfalto-activo: #3d6fb5;
-    --tinte: rgb(141 179 236 / 0.12);
-    color-scheme: dark;
-  }
-}
-
-:root[data-tema="oscuro"] {
-  --fondo: #1b1f26;
-  --superficie: #232933;
-  --texto: #e7ebf1;
-  --texto-suave: #a9b3c2;
-  --linea: #363d49;
-  --azul: #8db3ec;
-  --azul-hover: #b0cbf2;
-  --sobre-azul: #10233f;
-  --ambar: #f0b429;
-  --asfalto: #4a5263;
-  --asfalto-activo: #3d6fb5;
-  --tinte: rgb(141 179 236 / 0.12);
   color-scheme: dark;
 }
 
@@ -70,7 +57,6 @@
 }
 
 html {
-  scroll-padding-top: 5rem;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -82,11 +68,12 @@ html {
 
 body {
   margin: 0;
-  background: var(--fondo);
-  color: var(--texto);
+  background: var(--abismo);
+  color: var(--plata);
   font-family: var(--fuente);
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -94,7 +81,9 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.15;
+  margin: 0;
+  color: var(--platino);
+  font-weight: 500;
   text-wrap: balance;
 }
 
@@ -102,25 +91,21 @@ p {
   text-wrap: pretty;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
 a {
-  color: var(--azul);
-  text-underline-offset: 0.18em;
+  color: var(--niebla);
+  text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
 }
 
-a:hover {
-  text-decoration-thickness: 2px;
-}
-
 :focus-visible {
-  outline: 3px solid var(--azul);
+  outline: 2px solid var(--niebla);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+::selection {
+  background: var(--alga);
+  color: var(--platino);
 }
 
 .solo-lector {
@@ -140,11 +125,10 @@ a:hover {
   left: 1rem;
   top: -4rem;
   z-index: 20;
-  padding: 0.6rem 1rem;
-  background: var(--azul);
-  color: var(--sobre-azul);
+  padding: 0.75rem 1rem;
+  background: var(--alga);
+  color: var(--platino);
   border-radius: var(--radio);
-  font-weight: 650;
 }
 
 .saltar:focus {
@@ -160,39 +144,54 @@ a:hover {
 }
 
 .seccion {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
-  border-top: 1px solid var(--linea);
+  padding-block: var(--hueco-seccion);
+  scroll-margin-top: 1rem;
+}
+
+.seccion--hundida {
+  background: var(--profundo);
 }
 
 .seccion__cabecera {
-  margin-bottom: 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
 .seccion__cabecera h2 {
-  margin: 0;
-  font-size: clamp(1.85rem, 3.6vw, 2.5rem);
-  font-weight: 760;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.1rem, 4.6vw, 3.8125rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .seccion__cabecera h2:focus {
   outline: none;
 }
 
-.seccion__cabecera p {
-  margin: 0.75rem 0 0;
+.seccion__cabecera > p:not(.etiqueta) {
+  margin: var(--hueco) 0 0;
   max-width: var(--medida);
-  color: var(--texto-suave);
+}
+
+/* Etiqueta de sección: mayúsculas con tracking amplio, como un rótulo
+   de instrumento. */
+.etiqueta {
+  margin: 0 0 1rem;
+  color: var(--plata);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .subtitulo {
-  margin: 0 0 1rem;
-  font-size: 1.25rem;
-  font-weight: 700;
+  margin-bottom: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
 }
 
 /* ------------------------------------------------------------------
-   Botones y avisos
+   Botones
 ------------------------------------------------------------------- */
 .acciones {
   display: flex;
@@ -200,79 +199,141 @@ a:hover {
   gap: 0.75rem;
 }
 
+.acciones--centro {
+  justify-content: center;
+}
+
 .boton {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0.55rem 1.1rem 0.45rem;
-  border: 1.5px solid var(--azul);
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 1.375rem;
+  border: 1px solid var(--linea);
   border-radius: var(--radio);
-  background: transparent;
-  color: var(--azul);
+  background: var(--alga);
+  color: var(--platino);
   font: inherit;
-  font-weight: 650;
-  line-height: 1.2;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
 }
 
 .boton:hover {
-  background: var(--tinte);
+  border-color: var(--linea-fuerte);
 }
 
-.boton--principal {
-  background: var(--azul);
-  color: var(--sobre-azul);
+.boton--compacto {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 0.75rem;
 }
 
-.boton--principal:hover {
-  background: var(--azul-hover);
-  border-color: var(--azul-hover);
+/* Botón principal: degradado aurora que pasa del cian al rosa al pasar
+   el ratón. Solo uno por sección. */
+.boton--aurora {
+  border: 0;
+  background: var(--grad-aurora);
+  background-size: 180% 100%;
+  background-position: 0% 0;
+  color: #222222;
 }
 
-.boton--discreto {
-  padding-inline: 0.15rem;
-  border-color: transparent;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
+.boton--aurora:hover {
+  background-position: 100% 0;
 }
 
-.boton svg {
+@media (prefers-reduced-motion: no-preference) {
+  .boton--aurora {
+    transition: background-position 500ms ease;
+  }
+}
+
+/* Botón cuadrado de 32 px con la flecha de "ir a" */
+.boton-flecha {
+  display: inline-grid;
   flex-shrink: 0;
-  margin-top: -0.1em;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radio);
+  background: var(--relleno-flecha);
+  color: var(--platino);
 }
 
+a.boton-flecha:hover {
+  outline: 1px solid var(--linea-fuerte);
+}
+
+.enlace-fantasma {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  color: var(--platino);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.enlace-fantasma:hover {
+  color: var(--niebla);
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------
+   Avisos
+------------------------------------------------------------------- */
 .aviso {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem 1.5rem;
-  padding: 1.1rem 1.25rem;
-  background: var(--superficie);
-  border: 1px solid var(--linea);
-  border-left: 4px solid var(--ambar);
-  border-radius: var(--radio);
+  gap: var(--hueco);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--alga);
+  border-radius: var(--radio-tarjeta);
 }
 
 .aviso p {
   margin: 0;
   max-width: var(--medida);
+  color: var(--niebla);
 }
 
 .aviso--suave {
   margin-bottom: 1.5rem;
 }
 
+/* ------------------------------------------------------------------
+   Pie: pozo hundido con el nombre a tamaño gigante
+------------------------------------------------------------------- */
 .pie {
-  padding-block: 2rem 2.5rem;
-  border-top: 1px solid var(--linea);
-  color: var(--texto-suave);
-  font-size: 0.9375rem;
+  overflow: hidden;
+  padding-block: clamp(4.5rem, 10vw, 7.5rem) 0;
+  background: var(--profundo);
 }
 
-.pie p {
+.pie__texto {
   margin: 0;
+  max-width: var(--medida);
+  font-size: 0.875rem;
+}
+
+.pie__gigante {
+  margin: clamp(2.5rem, 6vw, 4.5rem) 0 -0.08em;
+  color: var(--alga);
+  font-size: clamp(3.5rem, 14.5vw, 11rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.046em;
+  white-space: nowrap;
+  user-select: none;
 }

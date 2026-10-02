@@ -1,12 +1,12 @@
 .formacion__columnas {
   display: grid;
-  gap: 3rem;
+  gap: 3.5rem;
 }
 
 @media (min-width: 56rem) {
   .formacion__columnas {
     grid-template-columns: 1.1fr 1fr;
-    gap: 4rem;
+    gap: 4.5rem;
   }
 }
 
@@ -18,45 +18,43 @@
 
 .estudio {
   display: grid;
-  gap: 0.1rem;
-  padding-block: 0.9rem;
-  border-bottom: 1px solid var(--linea);
-}
-
-.estudio:first-child {
-  padding-top: 0;
+  gap: 0.3rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--linea);
 }
 
 .estudio__titulo {
-  font-weight: 650;
+  color: var(--platino);
+  font-weight: 500;
 }
 
-.estudio__centro,
 .estudio__periodo {
-  color: var(--texto-suave);
-  font-size: 0.9375rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .ayuda {
-  margin: -0.5rem 0 1.25rem;
-  color: var(--texto-suave);
-  font-size: 0.9375rem;
+  margin: -0.5rem 0 1.5rem;
+  font-size: 0.875rem;
 }
 
 .habilidades__grupo + .habilidades__grupo {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .habilidades__grupo h4 {
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--plata);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .habilidades {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -65,23 +63,24 @@
 .habilidad {
   display: inline-flex;
   align-items: center;
-  min-height: 2.1rem;
-  padding: 0.3rem 0.8rem 0.2rem;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: var(--superficie);
-  color: var(--texto);
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0 0.8rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: none;
+  color: var(--plata);
   font: inherit;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
 }
 
 .habilidad--enlace {
-  border-color: var(--azul);
-  color: var(--azul);
-  font-weight: 650;
+  border-color: transparent;
+  background: var(--alga);
+  color: var(--platino);
   cursor: pointer;
 }
 
 .habilidad--enlace:hover {
-  background: var(--tinte);
+  border-color: var(--linea-fuerte);
 }

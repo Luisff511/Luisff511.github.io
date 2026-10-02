@@ -1,10 +1,11 @@
-# Publica la web en GitHub Pages cada vez que se sube un cambio a main.
+# Publica la web en GitHub Pages cada vez que se sube un cambio a la rama principal.
 # Los proyectos NO necesitan redesplegar: la web los pide a GitHub en directo.
 name: Desplegar en GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # Funciona tanto si la rama principal se llama main como master
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:

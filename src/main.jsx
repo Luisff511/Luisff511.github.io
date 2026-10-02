@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@fontsource-variable/overpass";
+import "@fontsource-variable/dm-sans";
 import "./styles/base.css";
 import App from "./App.jsx";
 

@@ -3,24 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#012624" />
+    <meta name="color-scheme" content="dark" />
     <title>Luis Franco, desarrollador frontend</title>
     <meta
       name="description"
       content="CV interactivo de Luis Fernando Franco Morales, desarrollador frontend en formación en Marbella. Proyectos cargados en directo desde GitHub."
     />
     <meta property="og:title" content="Luis Franco, desarrollador frontend" />
-    <meta
-      property="og:description"
-      content="CV interactivo con proyectos cargados en directo desde GitHub."
-    />
+    <meta property="og:description" content="CV interactivo con proyectos cargados en directo desde GitHub." />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script>
-      // Aplica idioma y tema guardados antes de pintar, para evitar parpadeos.
+      // Aplica el idioma guardado antes de pintar, para evitar parpadeos.
       (function () {
         try {
-          var tema = JSON.parse(localStorage.getItem("cv:tema"));
-          if (tema) document.documentElement.dataset.tema = tema;
           var idioma = JSON.parse(localStorage.getItem("cv:idioma"));
           if (idioma) document.documentElement.lang = idioma;
         } catch (e) {}

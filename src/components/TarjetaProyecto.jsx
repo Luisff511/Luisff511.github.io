@@ -1,27 +1,35 @@
-import { colorLenguaje } from "../utils/repos.js";
-import { tiempoRelativo } from "../utils/fechas.js";
 import { PROYECTOS } from "../config.js";
-import { IconoEstrella } from "./Iconos.jsx";
+import { tiempoRelativo } from "../utils/fechas.js";
+import { EnlaceExterno } from "./EnlaceExterno.jsx";
+import { IconoEstrella, IconoFlecha } from "./Iconos.jsx";
 
-export function TarjetaProyecto({ repo, idioma, tp }) {
+export function TarjetaProyecto({ repo, idioma, t }) {
+  const tp = t.proyectos;
   const clase = `proyecto${repo.destacado ? " proyecto--destacado" : ""}`;
 
   return (
     <article className={clase}>
-      {repo.destacado && <p className="proyecto__distintivo">{tp.destacado}</p>}
-      <h3 className="proyecto__titulo">{repo.titulo}</h3>
+      <div className="proyecto__cabecera">
+        <div>
+          {repo.destacado && <p className="etiqueta proyecto__distintivo">{tp.destacado}</p>}
+          <h3 className="proyecto__titulo">{repo.titulo}</h3>
+        </div>
+        <EnlaceExterno
+          className="boton-flecha"
+          href={repo.url}
+          aviso={t.pestanaNueva}
+          etiqueta={tp.verCodigo(repo.titulo)}
+        >
+          <IconoFlecha />
+        </EnlaceExterno>
+      </div>
 
       <p className={repo.descripcion ? "proyecto__desc" : "proyecto__desc proyecto__desc--vacia"}>
         {repo.descripcion || tp.sinDescripcion}
       </p>
 
       <ul className="proyecto__meta">
-        {repo.lenguaje && (
-          <li>
-            <span className="punto-lenguaje" style={{ "--color": colorLenguaje(repo.lenguaje) }} aria-hidden="true" />
-            {repo.lenguaje}
-          </li>
-        )}
+        {repo.lenguaje && <li>{repo.lenguaje}</li>}
         {repo.estrellas > 0 && (
           <li>
             <IconoEstrella />
@@ -41,18 +49,13 @@ export function TarjetaProyecto({ repo, idioma, tp }) {
         </ul>
       )}
 
-      <div className="proyecto__enlaces">
-        <a href={repo.url} target="_blank" rel="noopener noreferrer">
-          {tp.verCodigo}
+      {repo.demo && (
+        <EnlaceExterno className="enlace-fantasma" href={repo.demo} aviso={t.pestanaNueva}>
+          {tp.verDemo}
           <span className="solo-lector">: {repo.titulo}</span>
-        </a>
-        {repo.demo && (
-          <a href={repo.demo} target="_blank" rel="noopener noreferrer">
-            {tp.verDemo}
-            <span className="solo-lector">: {repo.titulo}</span>
-          </a>
-        )}
-      </div>
+          <IconoFlecha />
+        </EnlaceExterno>
+      )}
     </article>
   );
 }

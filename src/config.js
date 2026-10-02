@@ -8,7 +8,6 @@ export const PERFIL = {
   githubUrl: "https://github.com/Luisff511",
   linkedinUrl: "https://www.linkedin.com/in/luis-fernando-franco-morales-167978276/",
   email: "luis4c147896325@gmail.com",
-  foto: "foto.jpg",
   cvPdf: "cv-luis-franco-frontend-en.pdf",
 };
 
