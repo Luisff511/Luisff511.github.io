@@ -1,0 +1,62 @@
+/* Inicio a pantalla completa: pila de texto centrada con la esfera de
+   partículas detrás. */
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding-block: 7rem 5rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Empieza bajo la cabecera para que las partículas no pisen el menú */
+.hero__esfera {
+  position: absolute;
+  inset: 4.5rem 0 0;
+  z-index: -2;
+  width: 100%;
+  height: calc(100% - 4.5rem);
+}
+
+/* Agua oscura en el centro para que el texto se lea sobre la esfera, y
+   fundido al lienzo en la parte inferior. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgb(1 38 36 / 0.82), rgb(1 38 36 / 0.35) 65%, transparent 80%),
+    linear-gradient(to bottom, transparent 75%, var(--abismo));
+  pointer-events: none;
+}
+
+@media (max-width: 40rem) {
+  .hero::after {
+    background:
+      radial-gradient(ellipse 85% 40% at 50% 50%, rgb(1 38 36 / 0.86), rgb(1 38 36 / 0.4) 70%, transparent 95%),
+      linear-gradient(to bottom, transparent 75%, var(--abismo));
+  }
+}
+
+.hero__contenido {
+  max-width: 60rem;
+}
+
+.hero__nombre {
+  font-size: clamp(2.6rem, 7.4vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.046em;
+}
+
+.hero__nombre span {
+  display: block;
+}
+
+.hero__intro {
+  margin: 1.75rem auto 2.5rem;
+  max-width: var(--medida);
+  color: var(--niebla);
+}

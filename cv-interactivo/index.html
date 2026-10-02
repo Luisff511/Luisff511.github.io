@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#012624" />
+    <meta name="color-scheme" content="dark" />
+    <title>Luis Franco, desarrollador frontend</title>
+    <meta
+      name="description"
+      content="CV interactivo de Luis Fernando Franco Morales, desarrollador frontend en formación en Marbella. Proyectos cargados en directo desde GitHub."
+    />
+    <meta property="og:title" content="Luis Franco, desarrollador frontend" />
+    <meta property="og:description" content="CV interactivo con proyectos cargados en directo desde GitHub." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      // Aplica el idioma guardado antes de pintar, para evitar parpadeos.
+      (function () {
+        try {
+          var idioma = JSON.parse(localStorage.getItem("cv:idioma"));
+          if (idioma) document.documentElement.lang = idioma;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p>
+        Esta web necesita JavaScript. Puedes ver mi trabajo en
+        <a href="https://github.com/Luisff511">GitHub</a> y mi perfil en
+        <a href="https://www.linkedin.com/in/luis-fernando-franco-morales-167978276/">LinkedIn</a>.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

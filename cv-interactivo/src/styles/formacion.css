@@ -1,0 +1,86 @@
+.formacion__columnas {
+  display: grid;
+  gap: 3.5rem;
+}
+
+@media (min-width: 56rem) {
+  .formacion__columnas {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4.5rem;
+  }
+}
+
+.estudios {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.estudio {
+  display: grid;
+  gap: 0.3rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--linea);
+}
+
+.estudio__titulo {
+  color: var(--platino);
+  font-weight: 500;
+}
+
+.estudio__periodo {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ayuda {
+  margin: -0.5rem 0 1.5rem;
+  font-size: 0.875rem;
+}
+
+.habilidades__grupo + .habilidades__grupo {
+  margin-top: 1.5rem;
+}
+
+.habilidades__grupo h4 {
+  margin-bottom: 0.75rem;
+  color: var(--plata);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.habilidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.habilidad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0 0.8rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: none;
+  color: var(--plata);
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.habilidad--enlace {
+  border-color: transparent;
+  background: var(--alga);
+  color: var(--platino);
+  cursor: pointer;
+}
+
+.habilidad--enlace:hover {
+  border-color: var(--linea-fuerte);
+}
