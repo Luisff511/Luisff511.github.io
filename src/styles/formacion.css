@@ -1,0 +1,87 @@
+.formacion__columnas {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 56rem) {
+  .formacion__columnas {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+.estudios {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.estudio {
+  display: grid;
+  gap: 0.1rem;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--linea);
+}
+
+.estudio:first-child {
+  padding-top: 0;
+}
+
+.estudio__titulo {
+  font-weight: 650;
+}
+
+.estudio__centro,
+.estudio__periodo {
+  color: var(--texto-suave);
+  font-size: 0.9375rem;
+}
+
+.ayuda {
+  margin: -0.5rem 0 1.25rem;
+  color: var(--texto-suave);
+  font-size: 0.9375rem;
+}
+
+.habilidades__grupo + .habilidades__grupo {
+  margin-top: 1.25rem;
+}
+
+.habilidades__grupo h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.habilidades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.habilidad {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  padding: 0.3rem 0.8rem 0.2rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+
+.habilidad--enlace {
+  border-color: var(--azul);
+  color: var(--azul);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.habilidad--enlace:hover {
+  background: var(--tinte);
+}

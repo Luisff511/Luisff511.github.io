@@ -1,0 +1,15 @@
+.contacto__email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contacto__direccion {
+  font-size: clamp(1.25rem, 3.4vw, 2rem);
+  font-weight: 720;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  color: var(--texto);
+}

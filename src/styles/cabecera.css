@@ -1,0 +1,84 @@
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--fondo);
+  border-bottom: 1px solid var(--linea);
+}
+
+.cabecera__fila {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 4rem;
+}
+
+.cabecera__marca {
+  font-weight: 800;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.cabecera__nav {
+  margin-left: auto;
+}
+
+.cabecera__nav ul {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cabecera__nav a {
+  color: var(--texto-suave);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cabecera__nav a:hover {
+  color: var(--texto);
+  text-decoration: underline;
+}
+
+.cabecera__acciones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.boton-icono {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.boton-icono:hover {
+  border-color: var(--texto-suave);
+}
+
+.boton-icono--texto {
+  padding-top: 0.15em;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 47.99rem) {
+  .cabecera__nav {
+    display: none;
+  }
+
+  .cabecera__acciones {
+    margin-left: auto;
+  }
+}

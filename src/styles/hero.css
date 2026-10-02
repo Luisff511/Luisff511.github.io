@@ -1,0 +1,81 @@
+.hero {
+  padding-block: clamp(3rem, 9vw, 6.5rem) clamp(3rem, 7vw, 5rem);
+}
+
+.hero__rejilla {
+  display: grid;
+  gap: 2rem;
+}
+
+.hero__foto {
+  width: 5.5rem;
+  height: auto;
+  border-radius: var(--radio);
+  order: -1;
+}
+
+@media (min-width: 48rem) {
+  .hero__rejilla {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+
+  .hero__foto {
+    order: 0;
+    width: 8.5rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.hero__nombre {
+  margin: 0;
+  font-size: clamp(2.6rem, 8.6vw, 5.5rem);
+  font-weight: 820;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.hero__nombre span {
+  display: block;
+}
+
+/* La "carretera": una franja de asfalto con línea ámbar discontinua,
+   el mismo dibujo que los carriles de la trayectoria. Se traza una sola
+   vez al cargar la página. */
+.hero__carretera {
+  width: min(100%, 26rem);
+  height: 0.75rem;
+  margin: 1.75rem 0 1.5rem;
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(to right, var(--ambar) 0 14px, transparent 14px 24px) center / 100% 2px no-repeat,
+    var(--asfalto);
+  transform-origin: left center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__carretera {
+    animation: trazar 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 150ms both;
+  }
+}
+
+@keyframes trazar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero__rol {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.2vw, 1.375rem);
+  font-weight: 650;
+}
+
+.hero__intro {
+  margin: 0.75rem 0 2rem;
+  max-width: var(--medida);
+  color: var(--texto-suave);
+}
