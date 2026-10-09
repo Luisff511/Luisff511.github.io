@@ -21,16 +21,16 @@ export function Trayectoria({ t, idioma }) {
   return (
     <section id="trayectoria" className="seccion seccion--hundida" aria-labelledby="trayectoria-titulo">
       <div className="contenedor">
-        <header className="seccion__cabecera">
+        <header className="seccion__cabecera" data-revelar="cabecera">
           <p className="etiqueta">{tt.etiqueta}</p>
           <h2 id="trayectoria-titulo">{tt.titulo}</h2>
           <p>{tt.intro}</p>
         </header>
 
         <div className="trayectoria__rejilla">
-          <div className="carriles-panel">
+          <div className="carriles-panel" data-revelar="">
             <ul className="carriles">
-              {EXPERIENCIA.map((exp) => {
+              {EXPERIENCIA.map((exp, i) => {
                 const inicio = posicion(aAnioDecimal(exp.inicio));
                 const fin = exp.fin ? posicion(aAnioDecimal(exp.fin, true)) : 100;
                 return (
@@ -49,7 +49,7 @@ export function Trayectoria({ t, idioma }) {
                       <span className="carril__via" aria-hidden="true">
                         <span
                           className="carril__tramo"
-                          style={{ "--inicio": `${inicio}%`, "--ancho": `${fin - inicio}%` }}
+                          style={{ "--inicio": `${inicio}%`, "--ancho": `${fin - inicio}%`, "--i": i }}
                         />
                       </span>
                     </button>

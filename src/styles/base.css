@@ -145,7 +145,7 @@ a {
 
 .seccion {
   padding-block: var(--hueco-seccion);
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 4rem;
 }
 
 .seccion--hundida {
@@ -328,6 +328,7 @@ a.boton-flecha:hover {
 }
 
 .pie__gigante {
+  display: flex;
   margin: clamp(2.5rem, 6vw, 4.5rem) 0 -0.08em;
   color: var(--alga);
   font-size: clamp(3.5rem, 14.5vw, 11rem);
@@ -336,4 +337,100 @@ a.boton-flecha:hover {
   letter-spacing: -0.046em;
   white-space: nowrap;
   user-select: none;
+}
+
+/* ------------------------------------------------------------------
+   Movimiento al hacer scroll
+   index.html pone <html class="anima"> solo si se permite movimiento;
+   sin esa clase todo se ve quieto y completo.
+------------------------------------------------------------------- */
+
+/* Grano de película muy suave sobre todo el lienzo */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Barra de progreso de lectura con el degradado aurora */
+.progreso-pagina {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 25;
+  height: 2px;
+  background: var(--grad-aurora);
+  transform: scaleX(var(--scroll, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+html:not(.anima) .progreso-pagina {
+  display: none;
+}
+
+/* Aparición: sube, se enfoca y se hace visible al entrar en pantalla.
+   --i escalona los elementos de una misma lista. */
+.anima [data-revelar] {
+  opacity: 0;
+  transform: translateY(2rem);
+  filter: blur(6px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.anima [data-revelar][data-visto] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Cabecera de sección: cada hijo entra por su cuenta y el título sube
+   desde detrás de una máscara. */
+.anima [data-revelar="cabecera"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.anima [data-revelar="cabecera"] > * {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.anima [data-revelar="cabecera"] > h2 {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(0.45em);
+  transition-delay: 90ms;
+}
+
+.anima [data-revelar="cabecera"] > p:not(.etiqueta) {
+  transition-delay: 220ms;
+}
+
+.anima [data-revelar="cabecera"][data-visto] > * {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(-10% -5% -20% -5%);
+}
+
+/* Pie: las letras del nombre suben una a una al llegar al final (--p) */
+.pie__gigante span {
+  display: inline-block;
+}
+
+.anima .pie__gigante span {
+  --sube: clamp(0, calc(var(--p, 1) * 1.9 - var(--i) * 0.07), 1);
+  transform: translateY(calc((1 - var(--sube)) * 105%));
 }

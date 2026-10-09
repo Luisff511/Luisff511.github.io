@@ -90,7 +90,9 @@ export function EsferaParticulas({ className }) {
     };
 
     const dimensionar = () => {
-      const { width, height } = lienzo.getBoundingClientRect();
+      // Tamaño de maquetación, sin el zoom que le aplica el scroll del inicio.
+      const width = lienzo.clientWidth;
+      const height = lienzo.clientHeight;
       const densidad = Math.min(window.devicePixelRatio || 1, 2);
       ancho = width;
       alto = height;

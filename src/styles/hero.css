@@ -1,14 +1,29 @@
 /* Inicio a pantalla completa: pila de texto centrada con la esfera de
-   partículas detrás. */
+   partículas detrás. Con movimiento, la sección mide más que la pantalla
+   y la escena va fija mientras --p (0 a 1) avanza. */
 .hero {
+  position: relative;
+  text-align: center;
+}
+
+.hero__escena {
   position: relative;
   isolation: isolate;
   display: grid;
   place-items: center;
   min-height: 100svh;
   padding-block: 7rem 5rem;
-  overflow: hidden;
-  text-align: center;
+  overflow: clip;
+}
+
+.anima .hero {
+  height: 175svh;
+}
+
+.anima .hero__escena {
+  position: sticky;
+  top: 0;
+  height: 100svh;
 }
 
 /* Empieza bajo la cabecera para que las partículas no pisen el menú */
@@ -22,7 +37,7 @@
 
 /* Agua oscura en el centro para que el texto se lea sobre la esfera, y
    fundido al lienzo en la parte inferior. */
-.hero::after {
+.hero__escena::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -34,7 +49,7 @@
 }
 
 @media (max-width: 40rem) {
-  .hero::after {
+  .hero__escena::after {
     background:
       radial-gradient(ellipse 85% 40% at 50% 50%, rgb(1 38 36 / 0.86), rgb(1 38 36 / 0.4) 70%, transparent 95%),
       linear-gradient(to bottom, transparent 75%, var(--abismo));
@@ -51,12 +66,120 @@
   letter-spacing: -0.046em;
 }
 
-.hero__nombre span {
+.hero__linea {
   display: block;
+}
+
+.hero__linea > span {
+  display: inline-block;
 }
 
 .hero__intro {
   margin: 1.75rem auto 2.5rem;
   max-width: var(--medida);
   color: var(--niebla);
+}
+
+/* Indicador de scroll: una línea que cae en bucle */
+.hero__desliza {
+  position: absolute;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  left: 50%;
+  display: none;
+  margin: 0;
+  translate: -50% 0;
+  font-size: 0.625rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.hero__desliza-linea {
+  display: block;
+  width: 1px;
+  height: 2.75rem;
+  margin: 0.75rem auto 0;
+  overflow: hidden;
+  background: var(--linea);
+}
+
+.hero__desliza-linea::after {
+  content: "";
+  display: block;
+  height: 40%;
+  background: var(--grad-bioluminiscente);
+  animation: caer 2.2s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}
+
+@keyframes caer {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(250%);
+  }
+}
+
+/* ---------------- Movimiento ---------------- */
+
+/* Entrada al cargar: el nombre sube desde detrás de una máscara y el resto
+   aparece desenfocado, en cascada (--d). */
+.anima .hero__linea {
+  overflow: clip;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.anima .hero__linea > span {
+  animation: subir 1.3s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(150ms + var(--d) * 120ms);
+}
+
+.anima .hero__entra {
+  animation: enfocar 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(250ms + var(--d) * 130ms);
+}
+
+.anima .hero__esfera {
+  animation: emerger 2.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes subir {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes enfocar {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(14px);
+  }
+}
+
+@keyframes emerger {
+  from {
+    opacity: 0;
+    scale: 0.82;
+  }
+}
+
+/* Al bajar: el texto se aleja hacia arriba y la cámara entra en la esfera */
+.anima .hero__contenido {
+  transform: translateY(calc(var(--p, 0) * -14vh)) scale(calc(1 - var(--p, 0) * 0.1));
+  opacity: calc(1 - var(--p, 0) * 1.7);
+  filter: blur(calc(var(--p, 0) * 8px));
+  will-change: transform, opacity;
+}
+
+.anima .hero__esfera {
+  transform: scale(calc(1 + var(--p, 0) * 1.1));
+  opacity: calc(1 - var(--p, 0) * 0.75);
+  will-change: transform;
+}
+
+.anima .hero__desliza {
+  display: block;
+  opacity: calc(1 - var(--p, 0) * 8);
+  animation: enfocar 1.2s 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }

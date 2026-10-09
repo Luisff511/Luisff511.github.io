@@ -1,0 +1,44 @@
+/* Frase grande que se ilumina palabra a palabra. Sin movimiento, la
+   sección es normal y la frase se ve entera. */
+.manifiesto__escena {
+  display: grid;
+  align-items: center;
+  padding-block: var(--hueco-seccion);
+}
+
+.anima .manifiesto {
+  height: 260svh;
+}
+
+.anima .manifiesto__escena {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  padding-block: 0;
+}
+
+.manifiesto__texto {
+  margin: 0;
+  max-width: 22ch;
+  color: var(--platino);
+  font-size: clamp(2rem, 5.6vw, 4.75rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.manifiesto__palabra--aurora {
+  background: var(--grad-aurora);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cada palabra pasa de apagada a encendida en su tramo del scroll: la
+   primera se enciende al 0 % y la última hacia el 85 %. */
+.anima .manifiesto__palabra {
+  --encendido: clamp(0, calc(var(--p, 0) * var(--n) * 1.18 - var(--i)), 1);
+  opacity: calc(0.14 + var(--encendido) * 0.86);
+  filter: blur(calc((1 - var(--encendido)) * 3px));
+}

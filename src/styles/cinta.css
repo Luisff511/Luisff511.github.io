@@ -1,0 +1,53 @@
+/* Dos filas de habilidades a tamaño grande que se cruzan con el scroll */
+.cinta {
+  display: grid;
+  gap: 0.25em;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+  overflow: clip;
+  background: var(--profundo);
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.cinta__fila {
+  display: flex;
+  gap: 0.6em;
+  width: max-content;
+}
+
+.cinta__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--alga);
+}
+
+/* Separador: un punto con el degradado bioluminiscente */
+.cinta__item::after {
+  content: "";
+  width: 0.14em;
+  height: 0.14em;
+  border-radius: 50%;
+  background: var(--grad-bioluminiscente);
+}
+
+.cinta__fila--1 .cinta__item {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--linea-fuerte);
+}
+
+.cinta__fila--0 {
+  transform: translateX(calc(-8% - var(--p, 0.5) * 22%));
+}
+
+.cinta__fila--1 {
+  transform: translateX(calc(-30% + var(--p, 0.5) * 22%));
+}
+
+.cinta__fila {
+  will-change: transform;
+}

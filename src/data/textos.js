@@ -13,6 +13,13 @@ export const TEXTOS = {
     hero: {
       etiqueta: "Desarrollador frontend en Marbella",
       verProyectos: "Ver proyectos",
+      desliza: "Desliza",
+    },
+    // Las palabras entre *asteriscos* se iluminan con el degradado aurora.
+    manifiesto: {
+      etiqueta: "Enfoque",
+      texto:
+        "Construyo interfaces *rápidas* y *accesibles* que se entienden a la primera. Cuido cada detalle, del primer píxel a la última línea de código, para que funcionen en *cualquier pantalla*.",
     },
     cifras: {
       titulo: "En cifras",
@@ -95,6 +102,12 @@ export const TEXTOS = {
     hero: {
       etiqueta: "Frontend developer in Marbella, Spain",
       verProyectos: "See projects",
+      desliza: "Scroll",
+    },
+    manifiesto: {
+      etiqueta: "Approach",
+      texto:
+        "I build *fast*, *accessible* interfaces that make sense at first glance. I care about every detail, from the first pixel to the last line of code, so they work on *any screen*.",
     },
     cifras: {
       titulo: "In numbers",

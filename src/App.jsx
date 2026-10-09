@@ -4,11 +4,14 @@ import { TEXTOS } from "./data/textos.js";
 import { useGithubRepos } from "./hooks/useGithubRepos.js";
 import { usePreferencia } from "./hooks/usePreferencia.js";
 import { useConsultaMedia } from "./hooks/useConsultaMedia.js";
+import { useAnimacionesScroll } from "./hooks/useAnimacionesScroll.js";
 import { Cabecera } from "./components/Cabecera.jsx";
 import { Hero } from "./components/Hero.jsx";
+import { Manifiesto } from "./components/Manifiesto.jsx";
 import { Cifras } from "./components/Cifras.jsx";
 import { Proyectos } from "./components/Proyectos.jsx";
 import { Trayectoria } from "./components/Trayectoria.jsx";
+import { Cinta } from "./components/Cinta.jsx";
 import { Formacion } from "./components/Formacion.jsx";
 import { Contacto } from "./components/Contacto.jsx";
 
@@ -18,6 +21,7 @@ export default function App() {
   const [idioma, setIdioma] = usePreferencia("idioma", idiomaDelNavegador);
   const menosMovimiento = useConsultaMedia("(prefers-reduced-motion: reduce)");
   const t = TEXTOS[idioma] ?? TEXTOS.es;
+  useAnimacionesScroll();
 
   // Los repos se piden aquí (y no en Proyectos) porque también los usan
   // Cifras (el total) y Formación (qué habilidades enlazan con proyectos).
@@ -39,25 +43,33 @@ export default function App() {
 
   return (
     <>
+      <div className="progreso-pagina" aria-hidden="true" />
       <a className="saltar" href="#contenido">
         {t.saltar}
       </a>
       <Cabecera t={t} idioma={idioma} onCambiarIdioma={() => setIdioma(idioma === "es" ? "en" : "es")} />
       <main id="contenido">
         <Hero t={t} idioma={idioma} />
+        <Manifiesto t={t} />
         <Cifras t={t} github={github} />
         <Proyectos github={github} filtros={filtros} onCambiarFiltros={cambiarFiltros} idioma={idioma} t={t} />
         <Trayectoria t={t} idioma={idioma} />
+        <Cinta idioma={idioma} />
         <Formacion t={t} idioma={idioma} repos={github.repos} onElegirHabilidad={elegirHabilidad} />
         <Contacto t={t} />
       </main>
-      <footer className="pie">
+      <footer className="pie" data-progreso="entrada">
         <div className="contenedor">
           <p className="pie__texto">
             © {new Date().getFullYear()} {PERFIL.nombre}. {t.pie}
           </p>
+          {/* Cada letra sube desde el borde inferior al llegar al final */}
           <p className="pie__gigante" aria-hidden="true">
-            {PERFIL.nombreCorto}
+            {[...PERFIL.nombreCorto].map((letra, i) => (
+              <span key={i} style={{ "--i": i }}>
+                {letra === " " ? "\u00a0" : letra}
+              </span>
+            ))}
           </p>
         </div>
       </footer>
