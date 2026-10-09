@@ -178,3 +178,15 @@
     transform: translateY(4px);
   }
 }
+
+/* Los tramos crecen desde su inicio cuando el panel entra en pantalla */
+.anima .carril__tramo {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(300ms + var(--i, 0) * 110ms);
+}
+
+.anima .carriles-panel[data-visto] .carril__tramo {
+  transform: none;
+}

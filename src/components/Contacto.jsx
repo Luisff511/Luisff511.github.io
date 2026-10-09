@@ -8,9 +8,9 @@ const BASE = import.meta.env.BASE_URL;
 
 // Cada canal es una fila entera pulsable (el enlace del título se extiende
 // a toda la fila) con la flecha de "ir a" a la derecha.
-function Canal({ titulo, detalle, enlace, icono = <IconoFlecha />, extra }) {
+function Canal({ titulo, detalle, enlace, icono = <IconoFlecha />, extra, orden = 0 }) {
   return (
-    <li className="canal">
+    <li className="canal" data-revelar="" style={{ "--i": orden }}>
       <div className="canal__texto">
         <h3 className="canal__titulo">{enlace(titulo)}</h3>
         <p className="canal__detalle">{detalle}</p>
@@ -54,7 +54,7 @@ export function Contacto({ t }) {
     <section id="contacto" className="seccion" aria-labelledby="contacto-titulo">
       <div className="contenedor contacto__rejilla">
         <div>
-          <header className="seccion__cabecera">
+          <header className="seccion__cabecera" data-revelar="cabecera">
             <p className="etiqueta">{tc.etiqueta}</p>
             <h2 id="contacto-titulo">{tc.titulo}</h2>
             <p>{tc.intro}</p>
@@ -62,6 +62,7 @@ export function Contacto({ t }) {
 
           <ul className="canales">
             <Canal
+              orden={0}
               titulo={canales.email.titulo}
               detalle={PERFIL.email}
               enlace={(titulo) => (
@@ -79,9 +80,10 @@ export function Contacto({ t }) {
                 </button>
               }
             />
-            <Canal titulo={canales.linkedin.titulo} detalle={canales.linkedin.texto} enlace={externo(PERFIL.linkedinUrl)} />
-            <Canal titulo={canales.github.titulo} detalle={canales.github.texto} enlace={externo(PERFIL.githubUrl)} />
+            <Canal orden={1} titulo={canales.linkedin.titulo} detalle={canales.linkedin.texto} enlace={externo(PERFIL.linkedinUrl)} />
+            <Canal orden={2} titulo={canales.github.titulo} detalle={canales.github.texto} enlace={externo(PERFIL.githubUrl)} />
             <Canal
+              orden={3}
               titulo={canales.cv.titulo}
               detalle={canales.cv.texto}
               icono={<IconoDescarga />}
@@ -94,7 +96,7 @@ export function Contacto({ t }) {
           </ul>
         </div>
 
-        <Molecula className="contacto__molecula" />
+        <Molecula className="contacto__molecula" data-revelar="" />
       </div>
     </section>
   );

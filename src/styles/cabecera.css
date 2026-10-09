@@ -1,8 +1,33 @@
-/* Barra fina y transparente sobre el inicio */
+/* Barra fina y transparente sobre el inicio. Con movimiento queda fija:
+   se esconde al bajar, vuelve al subir y se vuelve de cristal fuera del inicio. */
 .cabecera {
   position: absolute;
   inset: 0 0 auto;
-  z-index: 5;
+  z-index: 20;
+}
+
+.anima .cabecera {
+  position: fixed;
+  border-bottom: 1px solid transparent;
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.anima:not([data-cabecera="arriba"]) .cabecera {
+  background: rgb(1 38 36 / 0.72);
+  border-bottom-color: var(--linea);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+.anima[data-cabecera="bajando"] .cabecera:not(:focus-within) {
+  transform: translateY(-100%);
+}
+
+.anima .cabecera__fila {
+  min-height: 4.25rem;
 }
 
 .cabecera__fila {
@@ -32,6 +57,7 @@
 }
 
 .cabecera__nav a {
+  position: relative;
   color: var(--plata);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
@@ -41,6 +67,22 @@
 
 .cabecera__nav a:hover {
   color: var(--platino);
+}
+
+/* Subrayado que crece desde la izquierda */
+.cabecera__nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -0.4rem;
+  height: 1px;
+  background: var(--grad-bioluminiscente);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cabecera__nav a:hover::after {
+  transform: scaleX(1);
 }
 
 .cabecera__acciones {

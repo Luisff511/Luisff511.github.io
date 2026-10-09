@@ -19,12 +19,12 @@ const CONEXIONES = [
   [2, 7], [3, 7], [3, 10], [3, 8], [4, 8], [4, 5],
 ];
 
-export function Molecula({ className }) {
+export function Molecula({ className, ...resto }) {
   return (
-    <svg className={className} viewBox="0 0 420 420" aria-hidden="true" focusable="false">
+    <svg className={className} viewBox="0 0 420 420" aria-hidden="true" focusable="false" {...resto}>
       <g className="molecula__lineas">
-        {CONEXIONES.map(([a, b]) => (
-          <line key={`${a}-${b}`} x1={NODOS[a].x} y1={NODOS[a].y} x2={NODOS[b].x} y2={NODOS[b].y} />
+        {CONEXIONES.map(([a, b], i) => (
+          <line key={`${a}-${b}`} pathLength="1" style={{ "--i": i }} x1={NODOS[a].x} y1={NODOS[a].y} x2={NODOS[b].x} y2={NODOS[b].y} />
         ))}
       </g>
       {NODOS.map((nodo, i) => (

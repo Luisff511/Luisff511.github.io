@@ -1,3 +1,4 @@
+import { Contador } from "./Contador.jsx";
 import "../styles/cifras.css";
 
 // Tres cifras del CV. La primera se calcula en directo con los repos de GitHub.
@@ -16,11 +17,11 @@ export function Cifras({ t, github }) {
     <section className="cifras" aria-label={tc.titulo}>
       <div className="contenedor">
         <dl className="cifras__lista">
-          {cifras.map((cifra) => (
-            <div key={cifra.etiqueta} className="cifra">
+          {cifras.map((cifra, i) => (
+            <div key={cifra.etiqueta} className="cifra" data-revelar="" style={{ "--i": i }}>
               <dt className="cifra__etiqueta">{cifra.etiqueta}</dt>
               <dd className="cifra__valor" aria-busy={cifra.cargando || undefined}>
-                {cifra.cargando ? <span aria-label={tc.cargando}>—</span> : cifra.valor}
+                {cifra.cargando ? <span aria-label={tc.cargando}>—</span> : <Contador key={cifra.valor} valor={cifra.valor} />}
               </dd>
             </div>
           ))}

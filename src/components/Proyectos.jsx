@@ -50,7 +50,7 @@ export function Proyectos({ github, filtros, onCambiarFiltros, idioma, t }) {
   return (
     <section id="proyectos" className="seccion" aria-labelledby="proyectos-titulo">
       <div className="contenedor">
-        <header className="seccion__cabecera">
+        <header className="seccion__cabecera" data-revelar="cabecera">
           <p className="etiqueta">{tp.etiqueta}</p>
           <h2 id="proyectos-titulo" tabIndex={-1}>
             {tp.titulo}
@@ -92,7 +92,7 @@ export function Proyectos({ github, filtros, onCambiarFiltros, idioma, t }) {
               </div>
             )}
 
-            <div className="herramientas">
+            <div className="herramientas" data-revelar="">
               <div className="campo">
                 <label htmlFor="buscar-proyectos">{tp.buscar}</label>
                 <input
@@ -152,8 +152,13 @@ export function Proyectos({ github, filtros, onCambiarFiltros, idioma, t }) {
 
             {visibles.length > 0 ? (
               <ul className="proyectos__lista">
-                {visibles.map((repo) => (
-                  <li key={repo.id} className={repo.destacado ? "proyectos__item--destacado" : undefined}>
+                {visibles.map((repo, i) => (
+                  <li
+                    key={repo.id}
+                    className={repo.destacado ? "proyectos__item--destacado" : undefined}
+                    data-revelar=""
+                    style={{ "--i": i % 6 }}
+                  >
                     <TarjetaProyecto repo={repo} idioma={idioma} t={t} />
                   </li>
                 ))}

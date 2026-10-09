@@ -10,7 +10,7 @@ export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
   return (
     <section id="formacion" className="seccion" aria-labelledby="formacion-titulo">
       <div className="contenedor">
-        <header className="seccion__cabecera">
+        <header className="seccion__cabecera" data-revelar="cabecera">
           <p className="etiqueta">{tf.etiqueta}</p>
           <h2 id="formacion-titulo">{tf.titulo}</h2>
         </header>
@@ -19,8 +19,8 @@ export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
           <div>
             <h3 className="subtitulo">{tf.estudios}</h3>
             <ul className="estudios">
-              {FORMACION.map((item) => (
-                <li key={item.titulo.es} className="estudio">
+              {FORMACION.map((item, i) => (
+                <li key={item.titulo.es} className="estudio" data-revelar="" style={{ "--i": i }}>
                   <span className="estudio__titulo">{item.titulo[idioma]}</span>
                   <span className="estudio__centro">{item.centro}</span>
                   <span className="estudio__periodo">{item.periodo[idioma]}</span>
@@ -33,7 +33,7 @@ export function Formacion({ t, idioma, repos, onElegirHabilidad }) {
             <h3 className="subtitulo">{tf.habilidades}</h3>
             <p className="ayuda">{tf.ayudaHabilidades}</p>
             {HABILIDADES.map((grupo) => (
-              <div key={grupo.grupo.es} className="habilidades__grupo">
+              <div key={grupo.grupo.es} className="habilidades__grupo" data-revelar="">
                 <h4>{grupo.grupo[idioma]}</h4>
                 <ul className="habilidades">
                   {grupo.items.map((item) => {
